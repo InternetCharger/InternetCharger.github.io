@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antonio Talavera — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#2b2620;
+    --espresso-2:#38312a;
+    --cream:#f4ebd9;
+    --cream-soft:#faf3e4;
+    --latte:#b3a48c;
+    --caramel:#e0a75c;
+    --rust:#c28952;
+    --line: rgba(244,235,217,0.16);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--espresso);
+    color:var(--cream);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; }
+  a{color:inherit; text-decoration:none;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--caramel);
+  }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+  section{ padding:96px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 800px 500px at 15% -5%, rgba(217,154,78,0.16), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 20%, rgba(184,122,63,0.13), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(43,38,32,0.85);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; padding:18px 28px; }
+  .brandmark{ font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; }
+  .navlinks{ display:flex; gap:28px; font-size:0.85rem; }
+  .navlinks a{ opacity:0.75; transition:opacity .2s; }
+  .navlinks a:hover{ opacity:1; color:var(--caramel); }
+
+  .hero{ padding-top:88px; position:relative; }
+  .hero-grid{
+    display:grid; grid-template-columns:220px 1fr; gap:52px; align-items:center;
+  }
+  .portrait-frame{
+    position:relative; width:220px; height:220px;
+  }
+  .portrait{
+    width:220px; height:220px; border-radius:50%;
+    background:linear-gradient(155deg, var(--espresso-2), var(--espresso));
+    border:2px solid var(--caramel);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-size:0.78rem; color:var(--latte);
+    text-align:center; padding:20px;
+    box-shadow:0 0 0 6px rgba(201,139,74,0.08), 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .steam{
+    position:absolute; top:-46px; left:50%; transform:translateX(-50%);
+    width:60px; height:60px; opacity:0.55;
+  }
+  .steam path{ stroke:var(--cream); stroke-width:2; fill:none; stroke-linecap:round; }
+  .steam .s1{ animation: rise 4s ease-in-out infinite; }
+  .steam .s2{ animation: rise 4s ease-in-out infinite 1.3s; }
+  @keyframes rise{
+    0%{ opacity:0; transform:translateY(6px); }
+    30%{ opacity:0.6; }
+    100%{ opacity:0; transform:translateY(-14px); }
+  }
+  @media (prefers-reduced-motion: reduce){ .s1,.s2{ animation:none !important; } }
+
+  h1.name{ font-size:clamp(2.1rem, 4vw, 3rem); margin-top:6px; }
+  .bio{ margin-top:14px; max-width:56ch; color:var(--cream-soft); font-size:1.02rem; }
+
+  .tagrow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  .tag{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.05em;
+    border:1px solid var(--line); padding:6px 12px; border-radius:20px; color:var(--latte);
+    background:rgba(240,230,211,0.04);
+  }
+
+  .social-row{ display:flex; gap:14px; margin-top:24px; }
+  .social-btn{
+    width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    transition:all .2s;
+  }
+  .social-btn:hover{ border-color:var(--caramel); background:rgba(201,139,74,0.12); }
+  .social-btn svg{ width:17px; height:17px; fill:var(--cream); }
+
+  .stampstrip{ margin-top:40px; display:flex; flex-wrap:wrap; gap:16px; }
+  .stamp{
+    display:flex; align-items:center; gap:12px;
+    border:1px dashed var(--line); border-radius:12px; padding:12px 16px;
+    background:rgba(240,230,211,0.03);
+  }
+  .stamp-badge{
+    width:38px; height:38px; border-radius:50%; flex-shrink:0;
+    border:1.5px solid var(--caramel); display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; color:var(--caramel); font-size:0.85rem;
+  }
+  .stamp-text .t1{ font-size:0.88rem; color:var(--cream-soft); font-weight:500; }
+  .stamp-text .t2{ font-size:0.74rem; color:var(--latte); }
+
+  .sec-head{ margin-bottom:44px; }
+  .sec-head h2{ font-size:clamp(1.6rem, 3vw, 2.1rem); margin-top:8px; }
+  .sec-head p{ color:var(--latte); margin-top:10px; max-width:60ch; font-size:0.95rem; }
+
+  .badge-row{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px; }
+  .badge{
+    display:flex; align-items:center; gap:8px;
+    border:1px solid var(--line); border-radius:8px; padding:8px 14px;
+    font-size:0.82rem; color:var(--cream-soft); background:var(--espresso-2);
+  }
+  .badge .dot{ width:6px; height:6px; border-radius:50%; background:var(--caramel); }
+
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:20px; }
+  .card{
+    background:var(--espresso-2); border:1px solid var(--line); border-radius:14px;
+    padding:24px; transition:transform .25s, border-color .25s;
+  }
+  .card:hover{ transform:translateY(-4px); border-color:var(--caramel); }
+  .card-icon{
+    width:42px; height:42px; border-radius:10px; background:rgba(201,139,74,0.12);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+    font-family:'Fraunces',serif; color:var(--caramel); font-weight:600;
+  }
+  .card h3{ font-size:1.08rem; margin-bottom:8px; }
+  .card p{ font-size:0.88rem; color:var(--latte); margin-bottom:16px; }
+  .card-link{
+    font-family:'JetBrains Mono', monospace; font-size:0.76rem; color:var(--caramel);
+    display:inline-flex; align-items:center; gap:6px; border-bottom:1px solid transparent;
+  }
+  .card-link:hover{ border-bottom-color:var(--caramel); }
+
+  .carousel{ position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:var(--espresso-2); }
+  .slides{ display:flex; transition:transform .5s cubic-bezier(.65,0,.35,1); }
+  .slide{ min-width:100%; }
+  .slide-img{
+    width:100%; height:520px;
+    background:linear-gradient(135deg, #3d352c, #2b2620);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--latte);
+    letter-spacing:0.05em;
+    cursor:pointer;
+    overflow:hidden;
+  }
+  .slide-img img{ width:100%; height:100%; object-fit:contain; }
+  .slide-caption{ padding:22px 26px; }
+  .slide-caption .prog{ font-size:0.72rem; color:var(--caramel); font-family:'JetBrains Mono',monospace; letter-spacing:0.08em; text-transform:uppercase; }
+  .slide-caption h3{ font-size:1.15rem; margin:6px 0 8px; }
+  .slide-caption p{ font-size:0.9rem; color:var(--cream-soft); }
+  .slide-caption p a{ color:var(--caramel); border-bottom:1px solid rgba(224,167,92,0.4); }
+  .slide-caption p a:hover{ border-bottom-color:var(--caramel); }
+
+  .car-controls{
+    position:absolute; top:50%; transform:translateY(-50%); width:100%;
+    display:flex; justify-content:space-between; padding:0 14px; pointer-events:none;
+  }
+  .car-btn{
+    pointer-events:all; width:40px; height:40px; border-radius:50%;
+    background:rgba(43,38,32,0.75); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    color:var(--cream); font-size:1.1rem; transition:background .2s;
+  }
+  .car-btn:hover{ background:rgba(201,139,74,0.25); }
+  .dots{ display:flex; justify-content:center; gap:8px; margin-top:16px; }
+  .dot-btn{ width:8px; height:8px; border-radius:50%; background:var(--line); cursor:pointer; border:none; transition:background .2s; }
+  .dot-btn.active{ background:var(--caramel); }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(20,16,12,0.94);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  .lightbox.open{ opacity:1; pointer-events:all; }
+  .lightbox img{
+    max-width:88vw; max-height:82vh; object-fit:contain;
+    border-radius:8px; box-shadow:0 30px 70px rgba(0,0,0,0.5);
+  }
+  .lightbox-close{
+    position:absolute; top:22px; right:26px;
+    width:42px; height:42px; border-radius:50%;
+    background:rgba(255,255,255,0.08); border:1px solid var(--line);
+    color:var(--cream); font-size:1.3rem; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .2s;
+  }
+  .lightbox-close:hover{ background:rgba(219,160,102,0.25); }
+  .lightbox-nav{
+    position:absolute; top:50%; transform:translateY(-50%); width:100%;
+    display:flex; justify-content:space-between; padding:0 22px;
+  }
+  .lightbox-btn{
+    width:46px; height:46px; border-radius:50%;
+    background:rgba(255,255,255,0.08); border:1px solid var(--line);
+    color:var(--cream); font-size:1.3rem; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .2s;
+  }
+  .lightbox-btn:hover{ background:rgba(219,160,102,0.25); }
+  .lightbox-caption{
+    position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
+    color:var(--latte); font-size:0.82rem; font-family:'JetBrains Mono',monospace; text-align:center;
+  }
+
+  .resume-frame{
+    border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--espresso-2);
+    height:640px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;
+  }
+  .resume-frame iframe{ width:100%; height:100%; border:none; display:none; }
+  .resume-placeholder{ text-align:center; color:var(--latte); padding:40px; }
+  .resume-placeholder .eyebrow{ display:block; margin-bottom:10px; }
+
+  .comp-list{ display:flex; flex-direction:column; }
+  .comp-row{
+    display:grid; grid-template-columns:120px 1fr auto; gap:18px; align-items:center;
+    padding:18px 0; border-top:1px solid var(--line);
+  }
+  .comp-list .comp-row:last-child{ border-bottom:1px solid var(--line); }
+  .comp-date{ font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--caramel); }
+  .comp-name{ font-size:1rem; font-weight:500; color:var(--cream-soft); }
+  .comp-type{ font-size:0.82rem; color:var(--latte); margin-top:2px; }
+  .comp-result{
+    font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--latte);
+    border:1px solid var(--line); padding:5px 12px; border-radius:20px; white-space:nowrap;
+  }
+
+  footer{ padding:56px 0 70px; text-align:center; }
+  footer .brandmark{ font-size:1.3rem; display:block; margin-bottom:14px; }
+  footer .social-row{ justify-content:center; margin:20px auto; }
+  footer .email{ color:var(--latte); font-size:0.9rem; }
+  footer .fineprint{ margin-top:26px; font-size:0.75rem; color:rgba(182,164,128,0.5); }
+
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  .float-note{
+    position:fixed; bottom:28px; right:28px; z-index:60;
+    display:flex; align-items:flex-start; gap:12px;
+    background:var(--espresso-2); border:1px solid var(--line); border-radius:14px;
+    padding:14px 16px; max-width:290px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.35);
+    transform:translateY(20px) scale(0.96); opacity:0;
+    transition:opacity .5s ease, transform .5s ease;
+    pointer-events:none;
+  }
+  .float-note.show{ opacity:1; transform:translateY(0) scale(1); pointer-events:all; }
+  .float-note .fn-icon{
+    width:32px; height:32px; border-radius:8px; flex-shrink:0;
+    background:rgba(219,160,102,0.16); display:flex; align-items:center; justify-content:center;
+    color:var(--caramel); font-family:'JetBrains Mono',monospace; font-size:0.75rem; font-weight:600;
+  }
+  .float-note .fn-body .fn-title{ font-size:0.8rem; font-weight:600; color:var(--cream-soft); }
+  .float-note .fn-body .fn-sub{ font-size:0.74rem; color:var(--latte); margin-top:3px; }
+  .float-note .fn-close{
+    margin-left:auto; background:none; border:none; color:var(--latte); cursor:pointer;
+    font-size:0.9rem; line-height:1; padding:2px;
+  }
+  .float-note .fn-close:hover{ color:var(--caramel); }
+
+  .signup-row{
+    display:flex; gap:10px; max-width:380px; margin:22px auto 0; flex-wrap:wrap; justify-content:center;
+  }
+  .signup-row input{
+    flex:1; min-width:180px; background:var(--espresso-2); border:1px solid var(--line);
+    border-radius:8px; padding:11px 14px; color:var(--cream); font-family:'Work Sans',sans-serif; font-size:0.88rem;
+  }
+  .signup-row input::placeholder{ color:var(--latte); }
+  .signup-row input:focus{ outline:none; border-color:var(--caramel); }
+  .signup-row button{
+    background:var(--caramel); color:var(--espresso); border:none; border-radius:8px;
+    padding:11px 18px; font-family:'JetBrains Mono',monospace; font-size:0.8rem; font-weight:600;
+    cursor:pointer; transition:opacity .2s;
+  }
+  .signup-row button:hover{ opacity:0.85; }
+
+  @media (max-width:640px){
+    .hero-grid{ grid-template-columns:1fr; text-align:center; }
+    .portrait-frame{ margin:0 auto; }
+    .social-row{ justify-content:center; }
+    .comp-row{ grid-template-columns:1fr; gap:6px; text-align:left; }
+    section{ padding:64px 0; }
+    .slide-img{ height:320px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brandmark">Antonio Talavera</span>
+    <div class="navlinks">
+      <a href="#work">Projects</a>
+      <a href="#volunteer">Volunteer</a>
+      <a href="#resume">Resume</a>
+      <a href="#competitions">Competitions</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="portrait-frame">
+        <svg class="steam" viewBox="0 0 60 60">
+          <path class="s1" d="M20 55 C20 45, 30 45, 28 35 C26 25, 34 25, 32 15" />
+          <path class="s2" d="M38 55 C38 47, 30 47, 32 38 C34 29, 26 29, 28 20" />
+        </svg>
+        <div class="portrait">
+             <img src="images/Antonio.Talavera.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">Cybersecurity · IAM &amp; GRC</span>
+        <h1 class="name">Antonio Talavera</h1>
+        <p class="bio">
+          CIS student at the University of Houston focused on identity & access management, governance, 
+          risk, and compliance. My passion in cybersecurity started when I experienced a cyberattack firsthand,
+          which led me to pursue the field. Currently interning with the USDA as an IT Program &amp; Resource
+          Analyst, gaining practical experience in technology, finance, and governance.
+        </p>
+        <div class="tagrow">
+          <span class="tag">SHPE</span>
+          <span class="tag">HACU</span>
+          <span class="tag">CHIME SCHOLAR</span>
+          <span class="tag">TAB</span>
+        </div>
+        <div class="social-row">
+          <a class="social-btn" href="mailto:antoniot1545@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13Zm2.2.5 7.8 6.1L19.8 6H4.2Zm-.2 1.6V18.5c0 .28.22.5.5.5h15a.5.5 0 0 0 .5-.5V7.6l-7.38 5.78a1 1 0 0 1-1.24 0L4 7.6Z"/></svg>
+          </a>
+          <a class="social-btn" href="https://github.com/InternetCharger" target="_blank" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.15c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.08.78 2.17v3.22c0 .3.21.66.79.55A10.99 10.99 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+          </a>
+          <a class="social-btn" href="https://www.linkedin.com/in/antonio-talavera-32614733a/" target="_blank" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stampstrip">
+      <div class="stamp">
+        <div class="stamp-badge">TAB</div>
+        <div class="stamp-text">
+          <div class="t1">Taylor Austin Broussard Legacy Scholarship</div>
+          <div class="t2">Winner — University of Houston </div>
+        </div>
+      </div>
+      <div class="stamp">
+        <div class="stamp-badge">CH</div>
+        <div class="stamp-text">
+          <div class="t1">CHIME Scholar</div>
+          <div class="t2">Fintech focused scholarship program — University of Houston</div>
+        </div>
+      </div>
+      <div class="stamp">
+        <div class="stamp-badge">MS</div>
+        <div class="stamp-text">
+          <div class="t1">Microsoft's Last Mile Education Scholarship</div>
+          <div class="t2">Winner — Houston City College</div>
+        </div>
+      </div>
+      <div class="stamp">
+        <div class="stamp-badge">NCL</div>
+        <div class="stamp-text">
+          <div class="t1">National Cyber League — Platinum Badge</div>
+          <div class="t2">Top 24%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">02 · Proof of Work</span>
+      <h2>Certifications &amp; Projects</h2>
+      <p>A running record of what I've built and the credentials backing it up — IAM, GRC, and applied cybersecurity work.</p>
+    </div>
+
+    <div class="badge-row">
+      <span class="badge"><span class="dot"></span>CompTIA A+ (Sept 2025)</span>
+      <span class="badge"><span class="dot"></span>CompTIA Network+ (May 2025)</span>
+      <span class="badge"><span class="dot"></span>CompTIA Security+ (May 2025)</span>
+    </div>
+
+    <div class="card-grid reveal">
+      <div class="card">
+        <div class="card-icon">01</div>
+        <h3>Small Enterprise Network Design</h3>
+        <p>Designed and implemented a multi-departmental branch network for a Houston-based retail company using Cisco routers and switches, with VLAN segmentation, inter-VLAN routing, and automated DHCP addressing.</p>
+        <a class="card-link" href="#" target="_blank">View on GitHub →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">02</div>
+        <h3>IT Support Simulation (ServiceNow)</h3>
+        <p>Simulated the full ticketing lifecycle — incident creation, categorization, prioritization, and resolution — including user account management, password resets, lockouts, and GPOs in a Windows Server VirtualBox lab.</p>
+        <a class="card-link" href="#" target="_blank">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="volunteer">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">03 · Giving Back</span>
+      <h2>Leadership &amp; Volunteer Work </h2>
+      <p>Programs and communities I've shown up for outside the classroom.</p>
+    </div>
+
+    <div class="carousel reveal">
+      <div class="slides" id="slides">
+        <div class="slide">
+          <div class="slide-img" onclick="openLightbox(0)"><img src="images/new_tech.jpg" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="slide-caption">
+            <span class="prog">Tech Fest Live</span>
+            <h3>STEM &amp; Cybersecurity Outreach</h3>
+            <p>Because of this opportunity, I had the privilege of attending <a href="https://www.linkedin.com/company/tech-fest-live/" target="_blank">Tech Fest Live</a> alongside the President of <a href="https://www.linkedin.com/company/cybr-sec-careers/" target="_blank">CYBR.SEC.Careers</a>, <a href="https://www.linkedin.com/in/mfarnum/" target="_blank">Michael Farnum</a>, where we introduced students to the many career opportunities available in cybersecurity. It was inspiring to see so many young students excited about STEM and technology.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-img" onclick="openLightbox(1)"><img src="images/UH ALUMNI.png" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="slide-caption">
+            <span class="prog">Cullen College Alumni Association</span>
+            <h3>Annual Crawfish Boil</h3>
+            <p>I had the opportunity to support the <a href="https://www.linkedin.com/company/cullen-college-alumni-association/" target="_blank">Cullen College Alumni Association</a> and work alongside great leadership, including <a href="https://www.linkedin.com/in/catherine-marie-brown/" target="_blank">Cathy Brown</a>, as well as volunteer leads Jose Alberto and <a href="https://www.linkedin.com/in/shalakadhavalikar/" target="_blank">Shalaka Dhavalikar</a>, for the annual crawfish boil that supports UH students with funding for their capstone projects.</p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-img" onclick="openLightbox(2)"><img src="images/capital one.jpg" style="width:100%;height:100%;object-fit:contain;"></div>
+          <div class="slide-caption">
+            <span class="prog">Capital One Launchpad Program</span>
+            <h3>HACU 1/30 Chosen</h3>
+            <p>Collaborated with a cross-functional cohort to design and pitch a fintech product concept — a credit-building credit card and app using non-traditional data — in partnership with HACU and TMCF. Jul 2026, McLean, VA.</p>
+          </div>
+        </div>
+      </div>
+      <div class="car-controls">
+        <button class="car-btn" onclick="moveSlide(-1)" aria-label="Previous">‹</button>
+        <button class="car-btn" onclick="moveSlide(1)" aria-label="Next">›</button>
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<section id="resume">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">04 · The Full Picture</span>
+      <h2>Resume</h2>
+      <p>Viewable directly below — no download required.</p>
+    </div>
+
+    <div class="resume-frame reveal">
+      <iframe src="images/ATalavera_Resume_2028_.pdf" 
+      style="display:block;"></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="competitions">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">05 · On the Board</span>
+      <h2>Competitions &amp; CTFs</h2>
+      <p>Hackathons, capture-the-flag events, and online competitions — updated as I take part in more.</p>
+    </div>
+
+    <div class="comp-list reveal">
+      <div class="comp-row">
+        <span class="comp-date">JUL 2026</span>
+        <div>
+          <div class="comp-name">Capital One Launchpad Pitch Competition</div>
+          <div class="comp-type">a credit-building credit card and app leveraging
+non-traditional data such as utility bills</div>
+        </div>
+        <span class="comp-result">5th place</span>
+      </div>
+      <div class="comp-row">
+        <span class="comp-date">NOV 2024</span>
+        <div>
+          <div class="comp-name">National Cyber League</div>
+          <div class="comp-type">Individual cybersecurity competition — Houston City College</div>
+        </div>
+        <span class="comp-result">Platinum Badge · Top 24%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+  <div class="lightbox-nav">
+    <button class="lightbox-btn" onclick="lightboxMove(-1)" aria-label="Previous">‹</button>
+    <button class="lightbox-btn" onclick="lightboxMove(1)" aria-label="Next">›</button>
+  </div>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<div class="float-note" id="floatNote">
+  <div class="fn-icon">GH</div>
+  <div class="fn-body">
+    <div class="fn-title">Notification from GitHub</div>
+    <div class="fn-sub">now · New commit pushed to small-enterprise-network-design</div>
+  </div>
+  <button class="fn-close" onclick="dismissNote()" aria-label="Dismiss">✕</button>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="brandmark">Antonio Talavera</span>
+    <div class="social-row">
+      <a class="social-btn" href="mailto:antoniot1545@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13Zm2.2.5 7.8 6.1L19.8 6H4.2Zm-.2 1.6V18.5c0 .28.22.5.5.5h15a.5.5 0 0 0 .5-.5V7.6l-7.38 5.78a1 1 0 0 1-1.24 0L4 7.6Z"/></svg>
+      </a>
+      <a class="social-btn" href="https://github.com/InternetCharger" target="_blank" aria-label="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.15c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.08.78 2.17v3.22c0 .3.21.66.79.55A10.99 10.99 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+      </a>
+      <a class="social-btn" href="https://www.linkedin.com/in/antonio-talavera-32614733a/" target="_blank" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+      </a>
+    </div>
+    <div class="email">antoniot1545@gmail.com</div>
+
+    <form class="signup-row" onsubmit="event.preventDefault(); window.location.href='mailto:antoniot1545@gmail.com?subject=Let%27s%20connect&body=Hi%20Antonio%2C%20I%20came%20across%20your%20portfolio...';">
+      <input type="email" placeholder="Your email" required>
+      <button type="submit">Get in touch</button>
+    </form>
+
+    <div class="fineprint">IAM &amp; GRC focus.</div>
+  </div>
+</footer>
+
+<script>
+  let idx = 0;
+  const slidesEl = document.getElementById('slides');
+  const slideCount = document.querySelectorAll('.slide').length;
+  const dotsEl = document.getElementById('dots');
+
+  for(let i=0;i<slideCount;i++){
+    const b = document.createElement('button');
+    b.className = 'dot-btn' + (i===0 ? ' active' : '');
+    b.onclick = () => { idx = i; render(); };
+    dotsEl.appendChild(b);
+  }
+
+  function render(){
+    slidesEl.style.transform = `translateX(-${idx*100}%)`;
+    document.querySelectorAll('.dot-btn').forEach((d,i)=> d.classList.toggle('active', i===idx));
+  }
+
+  function moveSlide(dir){
+    idx = (idx + dir + slideCount) % slideCount;
+    render();
+  }
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  const note = document.getElementById('floatNote');
+  function dismissNote(){ note.classList.remove('show'); }
+  setTimeout(()=>{ note.classList.add('show'); }, 1800);
+  setTimeout(()=>{ dismissNote(); }, 9000);
+
+  // Lightbox — click a slide thumbnail to expand, arrows/keys to move through, exit to close
+  const lightboxPhotos = [
+    { src: 'images/cyber.jpg', caption: 'Tech Fest Live — with CYBR.SEC.Careers' },
+    { src: '', caption: 'Cullen College Alumni Association — Crawfish Boil' },
+    { src: '', caption: 'Capital One Launchpad Program' }
+  ];
+  let lightboxIdx = 0;
+  const lightboxEl = document.getElementById('lightbox');
+  const lightboxImgEl = document.getElementById('lightboxImg');
+  const lightboxCaptionEl = document.getElementById('lightboxCaption');
+
+  function openLightbox(i){
+    if(!lightboxPhotos[i] || !lightboxPhotos[i].src){ return; }
+    lightboxIdx = i;
+    renderLightbox();
+    lightboxEl.classList.add('open');
+  }
+  function closeLightbox(){ lightboxEl.classList.remove('open'); }
+  function lightboxMove(dir){
+    let next = lightboxIdx;
+    for(let i=0;i<lightboxPhotos.length;i++){
+      next = (next + dir + lightboxPhotos.length) % lightboxPhotos.length;
+      if(lightboxPhotos[next].src){ lightboxIdx = next; break; }
+    }
+    renderLightbox();
+  }
+  function renderLightbox(){
+    lightboxImgEl.src = lightboxPhotos[lightboxIdx].src;
+    lightboxCaptionEl.textContent = lightboxPhotos[lightboxIdx].caption;
+  }
+  lightboxEl.addEventListener('click', (e)=>{ if(e.target === lightboxEl){ closeLightbox(); } });
+  document.addEventListener('keydown', (e)=>{
+    if(!lightboxEl.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowRight') lightboxMove(1);
+    if(e.key === 'ArrowLeft') lightboxMove(-1);
+  });
+</script>
+
+</body>
+</html>
